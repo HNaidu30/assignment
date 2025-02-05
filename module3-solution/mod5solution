@@ -1,0 +1,25 @@
+// STEP 0: Wrap in IIFE to avoid polluting global scope
+(function (global) {
+  var dc = {};
+
+  // STEP 1: Define an array of available category short names
+  var categories = ["L", "D", "S", "SP", "A", "B", "C"]; // Add actual category short names
+
+  // STEP 2: Function to get a random category short name
+  function getRandomCategory() {
+    var randomIndex = Math.floor(Math.random() * categories.length);
+    return categories[randomIndex];
+  }
+
+  // STEP 3: Modify the loadHomeSnippets function to replace {{randomCategoryShortName}}
+  var homeHtmlUrl = "snippets/home-snippet.html";
+  dc.loadHomeSnippets = function () {
+    $ajaxUtils.sendGetRequest(homeHtmlUrl, function (responseText) {
+      var randomCategoryShortName = getRandomCategory();
+      var updatedHtml = responseText.replace("{{randomCategoryShortName}}", randomCategoryShortName);
+      document.querySelector("#main-content").innerHTML = updatedHtml;
+    }, false);
+  };
+
+  global.$dc = dc;
+})(window);
