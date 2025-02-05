@@ -1,0 +1,28 @@
+// STEP 1: Wrap the entire script in an IIFE (Immediately Invoked Function Expression)
+(function () {
+    var names = ["John", "Jen", "Jason", "Paul", "Frank", "Larry", "Paula", "Laura", "Jim", "Lily"];
+
+    // STEP 2: Create two separate objects for Hello and Goodbye messages
+    var helloSpeaker = {};
+    var byeSpeaker = {};
+
+    // STEP 3: Attach 'speak' method to both objects
+    helloSpeaker.speak = function (name) {
+        console.log("Hello " + name);
+    };
+
+    byeSpeaker.speak = function (name) {
+        console.log("Goodbye " + name);
+    };
+
+    // STEP 4: Loop through the names array
+    for (var i = 0; i < names.length; i++) {
+        var firstLetter = names[i].charAt(0).toLowerCase(); // Get first letter in lowercase
+
+        if (firstLetter === 'j') {
+            byeSpeaker.speak(names[i]);  // Call Goodbye function
+        } else {
+            helloSpeaker.speak(names[i]); // Call Hello function
+        }
+    }
+})();
